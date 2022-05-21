@@ -1,0 +1,816 @@
+---
+title: "Week-08-Notes"
+author: "Andrew Nalundasan"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview Video
+
++ All about NoSQL and MongoDB
++ Setup MongoDB Atlas environment
++ Changes:
+
+    + Only in the area of screen layouts
+    + Watch the video
+    + But note these changes
+    
++ Setup: 
+
+    + "Learn MongoDB"
+    + "Application Modernization" 
+    + Preferred Language - doesn't matter. R
+    + Deploy a cloud DB: "Shared" - FREE
+    
++ Studio 3T
+    
+    + Free version is OK
+    + Request education license
+        + Writing in SQL 
+        + Aggregates
+        + MapReduce
+        + https://studio3t.com/discount/
+        
++ Query Assignments
+
+    + only of the Studeo 3T window
+        + Query
+        + Results
+        + Document count
+        
+![](query_submission.png)
+
+
+# 08-01: Data Types Exploration
+
+## 08-01-00 Part II - Semi-Structured and Unstructured Data
+
++ Corporate data changing over time - stuff that's going on right now
+
+    + any data that can help the corporation succeed and be profitable
+    + historical, real-time, reports/analysis, forecasts, prediction data
+    + traditional business environment - data has been easy to gather, especially Transactional
+
+Structured Data vs. Unstructured Data
+
+![](changing_data_formats.png)
+
++ Unstructured
+
+    + don't know what's going to be in an email
+        + always know what's going to be in a purchase order
+        + email only needs a to: and from:. Everything else is up to the sender
+    + 80% of enterprise data 
+        + 20% of enterprise data is structured
+        
++ Semi-structured & Unstructured data
+
+    + Data solutions
+        + MongoDB - document based data management solution
+        + Hadoop - foundational software used for Big Data (unstructured) 
+    + Queries
+        + PowerBI Desktop
+            + Getting data
+            + Wrangle data
+            + Visualizations
+            + Skills transferrable to Tableau
+            + Focus on **Data Query**
+        + SSMS
+        + Some native Mongo
+      
+## Data Types
+
++ Data Repositories
+
+    + Database (for structured data)
+        + Collections of data sets stored in a systematic way (properly controlled and structured)
+        + Document Store
+        + Data Warehouse
+        + Data Mart
+    + Data Lake (for unstructured data)
+        + Big storage area that receives all kinds of data in their native format
+        + Usually at high-velocity, from a variety of sources
+        
++ Types of Data
+
+    1. Structured (Relational)
+        + Rigid schema-based, for rows and columns
+    2. Semi-structured (NoSQL)
+        + Self-describing or schema-less
+    3. Unstructured (Big Data)
+        + Multiple, unknown, or changing structure
+        + This is where it gets FUN!
+
+## Structured Data
+
++ Schema-based, relational databases
+
+    + Traditional business databases
+    + Known and maintained format
+    + Products, sales, inventory, warehouse
+    + Must understand data in order to do anything with it
+    + pre-determined how the data should be structured
+    + known and maintained format
+
++ Requires a database management system
+
+    + heavyweight, server-based systems, hosted to cloud
+    + Controls all access and data integrity
+        + gatekeeper - prevents bad things from happening to the data
+    + Fast and scale upward
+    + Very rigid, expensive, and difficult to change
+    + SQL Server, Oracle, MySQL, PostgreSQL
+
+## Semi-Structured Data
+
++ Schema-less, Dynamic schema, NoSQL
+
+    + NoSQL <- Not Only SQL
+        + Can be relational, have rules, have security and governance
+        + doesn't have to be SQL based
+    + Types
+        + self-describing documents
+        + Graphs
+        + key-values
+    + Mobile and web applications
+    + Facebook, OneNote, EverNote
+        + Facebook:
+            + mobile device connects to Facebook and queries the data to display on feed
+            + DBMS is not deployed on personal devices
+            + basically a localized DB is brought to your phone related to your particular FB account
+        + Online banking:
+            + works by using secure document of information
+            + application can read the document and pull information
+        + All data is stored as documents and application must know how to access and interact with the data for your specific account
+    + DBMS not always required
+        + lightweight, mobile
+        + works across platforms and devices
+        + places data logic and integrity on the application
+        + places data logic and integrity on the application
+            + security can be a concern
+            + applications could vary and cause problems
+        + Frameworks: JSON, MongoDB, Redis, Cassandra
+            + Framework <- DBMS
+            + Frameworks <- concepts and rules rather than a DBMS
+        + must be able to transfer data via semi-structured data
+        + app updates:
+            + functionality, bugs, enhancements
+            + reflect changes that they're pushing into data structure
+            + Facebook implementing emotional reactions to 'likes'
+            + "Everything from this point forward will have 1/5 different emotions" 
+        + DBMS does all controls <- structured
+        + application does all controls (access to data and do things properly) <- semi-structured
+        + write the applications to recognize old data vs new data
+  
++ Semi-structured data (self-describing documents)
+
+    + repeats name of columns each time there's a data element
+    + insert new columns that have different field names 
+    + possible to convert a relational table into a self-describing document
+    + possible to read a self-describing document to build a relational table
+    
++ Graph data
+
+    + understanding relationship between items (people/machines/products/etc.)
+    
+## Unstructured Data (Big Data)
+
++ Unknown schema or definition
+
+    + **All data has some kind of structure** <- EXAM
+    + But we may not know the structure or control it
+    + structure varies
+
++ Can be pretty much any kind of data
+
+    + sensor data
+    + social media posts - the format is known in-house to read the data
+    + video/audio
+    + binary
+    
++ Unstructured data
+
+    + requires sophisticated tools
+        + Hadoop, HBase, Google BIg QUery, Dynamo DB
+        + **Often uses Data Lakes** - EXAM
+        + heavy-weight tools that are scalable and high-speed
+        + specially designed programming tools and skills
+        
++ **Big Data Characteristics** - EXAM
+
+    + big data meets any 1 or combination of these V's
+    + Volume, Velocity, Variety, Variability
+        + Volume - large quantity of data
+            + things are big
+            + lots of data, like video streaming
+        + Velocity - high-speed
+            + banking - purchase something and get notification on phone before you even walk out the store
+            + autonomous driving cars - sensors receiving huge amounts of data to base its decisions on
+        + Variety - data of different types
+            + data lake scenario - data of a lot of different types
+            + logistics company for deliveries
+        + Variability - lack of consistency in data
+            + weather machine sensors - lots of weather data but format is inconsistent
+    + Data Lake - selective of what goes in lake
+        + only things that will potentially be valuable to us in the future
+        
++ **Parallel processing is key to Big Data Processing** - EXAM
+
+    + ability to do things with multiple computers at the same time
+    + reason why things have changed so rapidly in the last 10 years
+    + rather than scaling up 1 computer to be bigger, better, faster, scale out multiple computers to spread the workload
+
+## Technical Environment
+
++ virtual desktop
++ access to MongoDB Atlas
++ Query Tools
+
+    + SSMS
+    + Power BI
+    + Excel
+    + Azure Data Studio (class-platform)
+        + https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15 
+
+
+# NoSQL Overview, Part 1
+
+## 08-02-01 NoSQL Databases
+
++ What is NoSQL?
+
+    + Does NOT Mean: No SQL
+        + They actually have SQL features
+    + Does NOT mean: Non-relational
+        + You can store relational data
+    + Means: Not-only-SQL
+        + Which means it stores MORE than relational data
+        + Can store unstructured data
+        + Can store various structures
+        + **Multi-modal data stores** <- stores multiple types of data structures all in the same DB, and not need multiple systems to get the work done - EXAM
+
++ NoSQL Evolution
+    
+    + Developed in late 2000s
+        + as storage costs dramatically decreased
+        + "how do we store data"
+    + all information about a customer is stored in a document within a collection
+    + collection <- table
+    + document <- row
+    + NoSQL - doesn't need to join tables to pull necessary data
+    + Focused on: - EXAM
+        + **multi-purpose** (multiple data types in same collection and being able to reference it all at the same time)
+        + **Flexibility** (iterate quickly, releasing new features)
+            + adding additional fields without having to modify a schema
+            + applications must be able to recognize new data structure
+        + **fast queries** (data accessed together lives together)
+        + **programming language** (agnostic)
+        + **horizontal scaling and replication** (low-cost)
+            + SQL Server wants to sit on a single server
+                + if scaling up, must put database on bigger better faster stronger server
+            + NoSQL scales horizontally - buy another machine and distribute processing and data between multiple machines
+        + **distributed data** (geographic-specific sharding)
+        
++ SQL vs. NoSQL
+
+![](SQLvsNoSQL.png)
+    
+## NoSQL Data Types
+
++ **Key-Value** <- large amounts with simple lookup
+    
+    + there's a key and there's a value that goes along with the key
+    + good with large amounts of data to do simple lookups
+
++ **Document** <- general purpose
+    
+    + relational or non-relational
+
++ **Wide-column** - large amounts predictable query patterns
+
+    + meant for data warehouse, data mart
+    + like storing historical data
+    + high speed queries, aggregations, etc.
+    
++ **Graph** <- storing and analyzing relationships between data
+
++ Key-Value 
+
+    + Simple data storage format (locker)
+        + Every item is stored as a key
+            + with its value
+            + values can vary in size and type
+        + All queries return a single value
+    + Cons
+        + does not use joins
+        + no indexing on values
+        + no querying on values
+        + not for complex data
+    + Applications
+        + online gaming site that shows top 10 players
+        + dictionary (word is key, definition is value)
+    + Products
+        + redis cache, riak, voldemort, cosmos db
+    + **in order to get anything out of a key-value DB, need to know the keys**
+        + query key-value structure 
+
+## Document Data Type
+
++ document data != SQL data
++ the way we organize data is different between the two 
++ Document
+
+    + Database consists of
+        + "Collection" of "Documents"
+            + "Table" of "Rows"
+    + Documents: 
+        + Are complex data structures
+        + can contain different data structures
+        + can contain nested documents
+    + Objectives
+        + rather than separating data (like in SQL), we group it together
+            + Common data is grouped together
+            + Even if some data is repeated
+        + speed and ease of use replaces data integrity
+        + high-speed queries
+            + Through sophisticated indexing
+            + defined links between data elements
+        + the whole concept of documents enables you to index anything within a structure
+        + squiggly brackets - {} indicates an entire document
+            + field names with key-value pairs
+            + fields can contain arrays
+            + fields can contain an array of sub-documents
+            
++ Document - Sub-document
+
+    + Data structures within data structures
+    + be mindful of the commas!
+    
+![](document-sub-document.png)
+
++ Document - Data Linking
+
+    + using documents with relationship to organize how the information is stored
+    + not used much in document DBs
+        + typically used to break up personal sensitive data to beef up security
+
+![](document-data-linking.png)
+
++ Relational Database vs. Document Database
+
+    + Relational
+        + Rows and columns
+    + Document
+        + Multiple documents within a collection
+    + Details depended on the product for relevance and avoid columns that have a bunch of Null's
+    + **You must know the schema that you're using to maintain consistency in order to do cross document queries** - EXAM
+        + must spell 'tags' consistently
+        + Requires diligence
+
++ Document Applications
+
+    + Uses
+        + same as most SQL databases
+        + Beneficial for: 
+            + Variable data elements
+            + changing data elements
+            + distributed data applications
+    + Products
+        + MongoDB
+        + Cassandra
+
+## Wide-Column Data Type
+
++ Wide-Column
+
+    + Stored data together as Column Family Store
+        + Column oriented, rather than rows (SQL)
+        + Column families are groups of related data
+            + often accessed together
+            + Can be of varying data types
+        + Optimized for large scale queries
+            + not for individual row-lookups
+            + not optimized for joins
+    + Stored together as **column families** - EXAM
+        + Rows do NOT have to contain all data columns
+        + rows can contain millions of columns
+        + New columns can be added easily
+        + Extremely scalable
+    + For data identification:
+        **+ Row ID
+        + Column Family 
+        + Column Name
+        + Timestame** - EXAM
+        
++ Data Model
+
+    + Rows
+        + Unique ID
+    + Columns
+        + Grouped in Column Families (CF)
+        + Variable columns
+        + Variable data types
+        + Consistent naming
+            + CF's
+            + Columns
+            
++ "Wide Column" due to Column Families
+
+    + typically have hundreds of rows
+
+# NoSQL Overview, Part 2
+
+## Graph Data Type
+
++ Graph
+
+    + Data format
+    + Method for connecting multiple data points through various relationship
+    
++ Graphs
+
+    + **Symmetric** (Hierarchical)
+    + **Asymmetric**
+        + Social media
+        + sales, equipment performance, etc.
+        + Vertices
+        + Edges
+        + Direction
+        + Correlation analysis to investigate causality
+        
++ Graph Queries
+
+    + Types of questions
+        + specific connections
+        + relationship between 2 points (vertices)
+        + Shortest distance between 2 points
+            + degrees of separation
+        + shared interests
+            + collaborative filtering
+    + Products:
+        + Neo4J, HyperGraphDB, MongoDB, SQL Server
+      
+## No SQL v SQL DBMS
+
++ Compared to SQL
+
+    + Data Manipulation (ACID)
+    + Security
+    + Scaling
+    + Disaster Recovery
+    + Data Distribution
+    
++ SQL - ACID Conditions
+
+    + **Atomicity** - guarantees each transaction is a single unit, unaffected by other transactions
+        + not as important in NoSQL
+    + **Consistency** - guarantees that a transaction follows all the rules or won't be applied
+    + **Isolation** - guarantees transaction happen sequentially, rather than at the same time
+        + not as important in NoSQL
+    + **Durability** - guarantees once a transaction is committed it remains, regardless of system failure
+    
++ NoSQL - CAP Theorem
+
+    + **Consistency** - every node in the cluster returns the same, most recent write
+        + stuff will be written
+    + **Availability** - every node returns a responses for all read and write requests in a reasonable amount of time
+        + SQL = 'durability'
+    + **Partition Tolerant** - the system continues to function and uphold consistency across network partitions
+        + it can fix itself...like Wolverine!
+        
++ Security
+    
+    + Varies by product
+        + some have enterprise-level offerings
+        + encryption at rest
+        + encryption in transit
+    + Traffic cop that owns the keys to the vault and only allows the approved people to access
+
+## Scaling and Replication
+
++ SQL scales up - need bigger, better, faster, stronger servers! 
+
+    + Avoid upgrades - buy a bigger server to fit needs of the future
+    + High-availability
+        + Synchronous replicas ($$$)
+            + must be written before main server continues receiving transactions (synchornous replica of PROD)
+            + backup replica to PROD that will step in if main server fails
+    + Recovery
+        + Asynchronous replicas
+            + does not need to be written before main server continues receiving transactions
+    
++ NoSQL scales in clusters
+
+    + add more rather than rip and replace with bigger, better, faster, stronger
+    + cluster <- commodity low-cost servers
+    + distributed computing capability is the advantage of NoSQL over SQL databases
+        + leads to 'parallel processing'!
+    + all requests go through the Router
+    + Router <- traffic cop that sends queries to the appropriate data storage and server to get result sets
+    + High-availability Cluster
+        + Synchronous replicas
+        + hot spares sitting there with nothing on it yet
+        + this seems like the greek monster that Hercules fights with the multiple heads that grow back 2 after 1 being cut off
+    + Recovery Cluster
+        + Asynchronous replicas
+        + doesn't need to mimic PROD until needed
+    
+
+## Distributed Data - Sharding
+
++ Sharding
+
+    + ability to separate data into physical collections
+        + not replicating, but distributing data
+        + reduces query workload on any one server
+        + improves response time to local users
+        + optimizes data location, based on demand
+            + online retail sales
+            + online multiplayer gaming sites
+            + real estate housing sites
+        + chunk out the data so that it can be queried intelligently
+    + it's like Infinity Stone shards!
+    
+
+# MongoDB Setup
+
+## MongoDB Intro
+
++ Mongo <- abbrev for "hu-MONGO-us" data
++ What is MongoDB
+    
+    + NoSQL Document database product
+    + Distributed and scalable
+    + Apps
+        + Air BnB - documents DB
+        + IMDB - documents DB
+        
++ MongoDB Benefits
+    
+    + In 2020 - the most popular Document database
+    + Scaling
+        + Auto-sharding and built-in high-availability
+    + Ease of use
+        + Maintains a document model
+            + easy mapping to applications
+        + Maintains multiple indices
+            + quick queries
+            + ad-hoc queries
+            + real-time aggregation
+    + https://www.mongodb.com/what-is-mongodb
+    
++ MongoDB Database Hosting
+
+    + Where to host a MongoDB Database?
+        + MongoDB Atlas
+            + Global database service (free tier)
+        + MongoDB on-premises
+            + Community edition (LInux, macOS, and Windows)
+            + Enterprise Edition (Linux, Windows Server) - costs $$$
+    + https://www.mongodb.com/try
+
+## MongoDB Atlas Setup
+
++ Follow the directions in the slides
+
+## MongoDB Tools
+
++ MongoDB Compass
+    
+    + Visual tool
+    + Simplified queries
+
++ MongoDB SHell
+
+    + Local command line tool
+    + Javascript
+    
++ Enterprise tools
+
+    + CLI for Cloud
+    + Database tools
+    + Connector for BI
+    
++ MongoDB Compass
+
+    + MongoDB Compass (optional)
+    + https://www.mongodb.com/try/download/compass
+    + optional to install
+    + Connect to MongoDB Atlas connection
+    
++ Studio 3T
+
+    + heaps of mongoDB tools
+    + Studio 3T is most popular
+        + most functional
+        + business-class tool
+        + GUI intervace
+        + https://studio3t.com/
+            + educational licenses
+            
+
+## Sudio 3T Install
+
++ walkthrough with video
+
+## Studio 3T Overview
+
++ Aggregates - similar to SQL
+
+    + running aggregate pipelines
+    
++ Map-Reduce - stringing together multiple queries to bring stuff together
+
+    + perform series of queries to get a singular answer that involves multiple steps
+    + specify how the DB engine finds outputs to queries
+
+# MongoDB Query
+
+## MQL Query Basics
+
++ SQL Server vs. MongoDB 
+
+    + unable to add values into tables with invalid IDs
+    + Document DB's, you can because no foreign keys
+
+![](sqlvsmql.png)
+
++ SQL Server
+
+    + Databases
+    + Tables
+    + Rows
+
++ MongoDB 
+
+    + Databases
+    + Collections
+    + Documents
+    
++ MQL 
+
+    + Not the same as SQL
+        + JOINs are not available
+        + Documents have the necessary data - no JOINs needed!
+        + Connecting to other collections is possible
+            + Requires extra steps using $lookup()
+    + 2 basic query methods synonymous with SELECT
+        + db.collection.find() <- this is a SELECT statement
+        + db.collection.aggregate() <- for calculations
+    + **Can never go wrong with a double quote "key": value**
+        
++ Query Example - AirBnb
+
+    + Documents always have an '_id' key and always the first field
+    + important to know what the *expected* value should be
+    
++ Queries
+
+    + 'List the documents'
+    + SQL
+        SELECT * 
+        FROM listingsAndReviews;
+    + MQL
+        db.getCollection("listingsAndReview").find({})
+        # start with table, then find the fields
+        # empty curly brackets means SELECT *
+    + 'List the URL and number of beds fields'
+    + MQL
+        db.getCollection("listingsAndReviews").find(
+          {listing_url: 1, beds: 1});
+        # colon (:) 1 <- include this data
+        # : 0 <- show me everything in this schema EXCEPT for anything with __: 0
+    + Either querying to find all fields or excluding all fields
+        + cannot mix and match
+
++ Queries - Project
+    
+    db.getCollection(listingsANdReviews").aggregate(
+      {$project: {listing_url: 1, beds: 1}});
+    # I want to project this list of fields
+        
+
++ Queries - Filter
+
+    + List the URL and number of beds fields for entries with 2 bedrooms
+    + MQL
+        db.getCollection("listingsAndReviews").find(
+          {bedrooms: {eq:2}},
+          {listing_url: 1, beds: 1});
+          
+    + Beware of equal default! 
+        + {bedrooms: {$eq:2}} <- same as {$filter:{bedrooms:2}}
+        
+    + Aggregate
+         db.getCollection("listingsAndReviews").aggregate(
+          {$filter: {bedrooms: 2}},
+          {$project:{listing_url: 1, beds: 1}});
+          
++ Query - Sort
+
+    + sort by number of beds
+    + MQL
+        db.getCollection(listingsAndReviews").find({bedrooms:{$eq:2}}, 
+          {listing_url:1, beds:1}).sort({beds:1})
+          
+        db.getCollection(listingsAndReviews").aggregate(
+          {$filter:{bedrooms:2}},
+          {$project: {listing_url:1, beds:1}},
+          {$sort: {beds:1}});
+
+![](query_fundamentals.png)
+
+## Select Fields
+
++ .find() - Fields
+
+    + Method fo including or excluding fields in a query result (aka result set)
+        + be careful to avoid filter set
+        + reference subdocument fields
+        + expand array and subdocument elements
+    + find() assumes things
+    
+![](find-structure.png)
+
+## Distinct()
+
++ .distinct()
+    
+    + provides a list of unique results
+        + as an array rather than a row
+    + for a single field only
+        + in quotes
+    + field name always goes in quotes ""
+    
+    db.getCollection("listingsAndReviews").distinct(
+    "amenities")
+    
+## Sort Results
+
++ .sort()
+
+    + a method for sorting results of a query
+    + ascending (1) and descending (-1)
+    + difficult to do multiple clause sorting
+    + not enough RAM (memory) to do multiple sorts
+
+# DTC
+
+```{r}
+library(tidyverse)
+library(jtools)
+query_1 <- read_csv("query1_csv.csv")
+
+```
+
+
+```{r}
+regression <- lm(`Fiscal Year` ~ `Income Group`, data = query_1)
+summary(regression)
+export_summs(regression)
+
+```
+
+
+```{r}
+p <- query_1 %>% 
+  ggplot(mapping = aes(x = `Fiscal Year`, fill = Region))
+
+p + geom_histogram(bins = 10, position = "dodge", stat = "count") 
+
+
+```
+
+
+```{r}
+p <- query_1 %>% 
+  ggplot(mapping = aes(x = `Income Group`, fill = Region))
+
+p + geom_histogram(bins = 10, position = "dodge", stat = "count") 
+```
+
+
+```{r}
+p <- query_1 %>% 
+  ggplot(mapping = aes(x = `Income Group`))
+
+p + geom_bar(bins = 10) 
+```
+
+
+```{r}
+p <- query_1 %>% 
+  ggplot(mapping = aes(x = `Fiscal Year`, y = `Customer Yearly Income`))
+
+p + geom_line()
+```
+
